@@ -646,7 +646,12 @@ export class DiceHM3 {
         }
 
         // Optional Rule - Bloodloss (Combat 14)
-        result.isBleeder = enableBloodloss && result.injuryLevel >= 4 && result.aspect != 'Fire';
+        result.isBleeder = enableBloodloss && (
+            (result.injuryLevel >= 2 && result.aspect === 'Edged') || 
+            (result.injuryLevel >= 4 && result.aspect === 'Blunt') || 
+            (result.injuryLevel >= 4 && result.aspect === 'Point') 
+        )
+
 
         // Optional Rule - Limb Injuries (Combat 14)
         if (armorLocationData.isFumble) {
